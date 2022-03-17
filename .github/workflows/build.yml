@@ -51,3 +51,16 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: ${{ secrets.DOCKER_REGISTRY }}/watch2discord:${{ github.ref_name }}
+
+  Release:
+    name: Release
+    needs: Build
+    runs-on: self-hosted
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - name: Init
+        uses: actions/checkout@v2
+      - name: Release
+        run: npx semantic-release@17
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
