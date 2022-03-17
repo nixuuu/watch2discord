@@ -27,7 +27,7 @@ export class BotService {
   onReaction(reaction: MessageReaction) {
     const { message } = reaction;
     const ytRegex = YOUTUBE_REGEX().exec(message.content);
-    const ytId = ytRegex[6];
+    const ytId = ytRegex[5];
     const youtubeVideoLink = `https://youtube.com/watch?v=${ytId}`;
     this.w2g.createRoom(youtubeVideoLink).subscribe((link) =>
       message.reply({
