@@ -2,7 +2,7 @@ import { InjectDiscordClient, On, Once, UseGuards } from '@discord-nestjs/core';
 import { Injectable, Logger } from '@nestjs/common';
 import { Client, MessageReaction } from 'discord.js';
 import { W2gService } from '../w2g/w2g.service';
-import { ChadReactionGuard } from './chad-reaction-guard.service';
+import { W2gReactionGuard } from './w2g-reaction.guard';
 import { YoutubeMessageGuard } from './youtube-message.guard';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class BotService {
   }
 
   @On('messageReactionAdd')
-  @UseGuards(ChadReactionGuard)
+  @UseGuards(W2gReactionGuard)
   @UseGuards(YoutubeMessageGuard)
   onReaction(reaction: MessageReaction) {
     const { message } = reaction;

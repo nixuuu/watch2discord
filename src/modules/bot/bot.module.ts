@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Intents } from 'discord.js';
 import { W2gModule } from '../w2g/w2g.module';
 import { BotService } from './bot.service';
-import { ChadReactionGuard } from './chad-reaction-guard.service';
+import { W2gReactionGuard } from './w2g-reaction.guard';
 
 @Module({
   imports: [
@@ -24,6 +24,6 @@ import { ChadReactionGuard } from './chad-reaction-guard.service';
     }),
     W2gModule,
   ],
-  providers: [BotService, ChadReactionGuard],
+  providers: [BotService, W2gReactionGuard],
 })
 export class BotModule {}
