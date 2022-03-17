@@ -1,6 +1,7 @@
 import { InjectDiscordClient, On, Once, UseGuards } from '@discord-nestjs/core';
 import { Injectable, Logger } from '@nestjs/common';
 import { Client, MessageReaction } from 'discord.js';
+import { YOUTUBE_REGEX } from '../../helpers/youtube';
 import { W2gService } from '../w2g/w2g.service';
 import { W2gReactionGuard } from './w2g-reaction.guard';
 import { YoutubeMessageGuard } from './youtube-message.guard';
@@ -25,10 +26,7 @@ export class BotService {
   @UseGuards(YoutubeMessageGuard)
   onReaction(reaction: MessageReaction) {
     const { message } = reaction;
-    const ytRegex =
-      /^((?:https?:)?\/\/)?((?:www|m)\.)?(youtube(-nocookie)?\.com|youtu.be)(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/.exec(
-        message.content,
-      );
+    const ytRegex = YOUTUBE_REGEX().exec(message.content);
     const ytId = ytRegex[6];
     const youtubeVideoLink = `https://youtube.com/watch?v=${ytId}`;
     this.w2g.createRoom(youtubeVideoLink).subscribe((link) =>
