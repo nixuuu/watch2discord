@@ -8,6 +8,6 @@ export class W2gReactionGuard implements DiscordGuard {
     event: 'messageCreate',
     [reaction]: [MessageReaction],
   ): boolean | Promise<boolean> {
-    return reaction.emoji.name === 'w2g';
+    return reaction.emoji.name === 'w2g' && reaction.count === 1;
   }
 }
