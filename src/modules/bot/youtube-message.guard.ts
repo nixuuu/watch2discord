@@ -1,7 +1,7 @@
 import { DiscordGuard } from '@discord-nestjs/core';
 import { Injectable } from '@nestjs/common';
 import { MessageReaction } from 'discord.js';
-import { YOUTUBE_REGEX } from '../../helpers/youtube';
+import { IS_YOUTUBE_LINK } from '../../helpers/youtube';
 
 @Injectable()
 export class YoutubeMessageGuard implements DiscordGuard {
@@ -9,6 +9,6 @@ export class YoutubeMessageGuard implements DiscordGuard {
     event: string,
     [reaction]: [MessageReaction],
   ): boolean | Promise<boolean> {
-    return YOUTUBE_REGEX().test(reaction.message.content);
+    return IS_YOUTUBE_LINK(reaction.message.content);
   }
 }
