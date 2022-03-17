@@ -1,14 +1,19 @@
 import { DiscordGuard } from '@discord-nestjs/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { MessageReaction } from 'discord.js';
 import { IS_YOUTUBE_LINK } from '../../helpers/youtube';
 
 @Injectable()
 export class YoutubeMessageGuard implements DiscordGuard {
-  public canActive(
+  private readonly logger = new Logger(YoutubeMessageGuard.name);
+  public async canActive(
     event: string,
     [reaction]: [MessageReaction],
-  ): boolean | Promise<boolean> {
+  ): Promise<boolean> {
+    if (reaction.partial) {
+      await reaction.fetch();
+    }
+    this.logger.debug(`msg: ${reaction.message.content}`);
     return IS_YOUTUBE_LINK(reaction.message.content);
   }
 }
