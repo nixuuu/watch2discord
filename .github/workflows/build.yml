@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - main
-      - develop
+      - beta
+      - next
 jobs:
   Test:
     runs-on: self-hosted
