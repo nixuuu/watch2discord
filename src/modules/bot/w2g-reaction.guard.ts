@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { MessageReaction } from 'discord.js';
 
 @Injectable()
-export class ChadReactionGuard implements DiscordGuard {
+export class W2gReactionGuard implements DiscordGuard {
   public canActive(
     event: 'messageCreate',
     [reaction]: [MessageReaction],
