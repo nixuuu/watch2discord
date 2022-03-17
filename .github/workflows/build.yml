@@ -44,7 +44,7 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm prebuild && pnpm build
-      - name: Build and push
+      - name: Build docker image
         uses: docker/build-push-action@v2
         with:
           context: ./
