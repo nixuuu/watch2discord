@@ -66,3 +66,12 @@ jobs:
         run: npx semantic-release@17
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  Deploy:
+    name: Deploy
+    needs: Build
+    runs-on: self-hosted
+    environment: Production
+    if: ${{ github.ref_name == 'main' }}
+    steps:
+      - working-directory: ${{ secrets.DEPLOY_DIR }}
+        run: docker-compose up -d -t0
