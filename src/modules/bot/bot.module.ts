@@ -19,6 +19,7 @@ import { W2gReactionGuard } from './w2g-reaction.guard';
             Intents.FLAGS.GUILD_MESSAGES,
             Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
           ],
+          partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
         },
       }),
     }),

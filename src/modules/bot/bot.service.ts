@@ -24,7 +24,10 @@ export class BotService {
   @On('messageReactionAdd')
   @UseGuards(W2gReactionGuard)
   @UseGuards(YoutubeMessageGuard)
-  onReaction(reaction: MessageReaction) {
+  async onReaction(reaction: MessageReaction) {
+    if (reaction.partial) {
+      await reaction.fetch();
+    }
     const { message } = reaction;
     const ytRegex = YOUTUBE_REGEX().exec(message.content);
     const ytId = ytRegex[5];
